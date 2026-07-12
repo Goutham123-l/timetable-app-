@@ -48,10 +48,10 @@ function Card({ children }: { children: React.ReactNode }) {
   return <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">{children}</div>;
 }
 
-function Th({ children }: { children: React.ReactNode }) {
+function Th({ children }: { children?: React.ReactNode }) {
   return <th className="text-left p-2 text-xs font-semibold text-slate-500 uppercase">{children}</th>;
 }
-function Td({ children }: { children: React.ReactNode }) {
+function Td({ children }: { children?: React.ReactNode }) {
   return <td className="p-2 border-t border-slate-100 text-sm">{children}</td>;
 }
 

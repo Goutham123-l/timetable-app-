@@ -16,16 +16,31 @@ const studentLinks = [{ to: "/", label: "Class Timetable" }];
 export default function Sidebar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const links = user?.role === "ADMIN" ? adminLinks : user?.role === "TEACHER" ? teacherLinks : studentLinks;
+
+  const links =
+    user?.role === "ADMIN"
+      ? adminLinks
+      : user?.role === "TEACHER"
+      ? teacherLinks
+      : studentLinks;
 
   return (
     <div className="w-72 bg-white border-r border-slate-200 min-h-screen flex flex-col">
-      <div className="p-5 border-b border-slate-200">
-        <h1 className="font-bold text-brand-600 text-lg leading-tight">Timely Campus</h1>
-        <p className="text-xs text-slate-500 mt-1">
+      
+      {/* Logo Section */}
+      <div className="p-5 border-b border-slate-200 flex flex-col items-center">
+        <img
+          src="https://res.cloudinary.com/n45xawtg/image/upload/v1784209550/TimelyCampus_logo_jaa6jq.jpg"
+          alt="Timely Campus Logo"
+          className="w-40 h-auto object-contain"
+        />
+
+        <p className="text-xs text-slate-500 mt-3">
           {user?.name} · <span className="uppercase">{user?.role}</span>
         </p>
       </div>
+
+      {/* Navigation */}
       <nav className="flex-1 p-3 space-y-1">
         {links.map((l) => (
           <NavLink
@@ -34,7 +49,9 @@ export default function Sidebar() {
             end={l.to === "/"}
             className={({ isActive }) =>
               `block px-3 py-2 rounded-lg text-sm ${
-                isActive ? "bg-brand-500 text-white" : "text-slate-700 hover:bg-slate-100"
+                isActive
+                  ? "bg-brand-500 text-white"
+                  : "text-slate-700 hover:bg-slate-100"
               }`
             }
           >
@@ -42,6 +59,8 @@ export default function Sidebar() {
           </NavLink>
         ))}
       </nav>
+
+      {/* Logout */}
       <div className="p-3 border-t border-slate-200">
         <button
           onClick={() => {

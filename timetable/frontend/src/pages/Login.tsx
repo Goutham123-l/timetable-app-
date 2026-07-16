@@ -27,7 +27,7 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand-50 to-slate-100">
       <form onSubmit={handleSubmit} className="bg-white/90 backdrop-blur p-8 rounded-2xl shadow-xl w-full max-w-sm border border-slate-200">
-        <h1 className="text-xl font-bold text-brand-700 mb-1">AI College Timetable</h1>
+        <h1 className="text-xl font-bold text-brand-700 mb-1">Timely Campus</h1>
         <p className="text-slate-500 text-sm mb-6">Sign in to continue</p>
 
         {error && <div className="bg-red-50 text-red-600 text-sm p-2 rounded mb-4">{error}</div>}

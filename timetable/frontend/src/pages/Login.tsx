@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("admin@college.edu");
   const [password, setPassword] = useState("password123");
   const [error, setError] = useState("");
@@ -14,6 +15,7 @@ export default function Login() {
     e.preventDefault();
     setError("");
     setLoading(true);
+
     try {
       await login(email, password);
       navigate("/");
@@ -25,46 +27,83 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand-50 to-slate-100">
-      <form onSubmit={handleSubmit} className="bg-white/90 backdrop-blur p-8 rounded-2xl shadow-xl w-full max-w-sm border border-slate-200">
-        <h1 className="text-xl font-bold text-brand-700 mb-1">Timely Campus</h1>
-        <p className="text-slate-500 text-sm mb-6">Sign in to continue</p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand-50 to-slate-100 px-4">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white/90 backdrop-blur p-8 rounded-2xl shadow-xl w-full max-w-md border border-slate-200"
+      >
+        {/* Logo */}
+        <div className="flex flex-col items-center mb-6">
+          <img
+            src="https://res.cloudinary.com/n45xawtg/image/upload/v1784209550/TimelyCampus_logo_jaa6jq.jpg"
+            alt="Timely Campus Logo"
+            className="w-56 h-auto object-contain mb-3"
+          />
 
-        {error && <div className="bg-red-50 text-red-600 text-sm p-2 rounded mb-4">{error}</div>}
+          <p className="text-slate-500 text-sm">
+            Sign in to continue
+          </p>
+        </div>
 
-        <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+        {/* Error Message */}
+        {error && (
+          <div className="bg-red-50 text-red-600 text-sm p-3 rounded-lg mb-4">
+            {error}
+          </div>
+        )}
+
+        {/* Email */}
+        <label className="block text-sm font-medium text-slate-700 mb-1">
+          Email
+        </label>
         <input
-          className="w-full border border-slate-300 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-brand-500"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
           type="email"
           required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full border border-slate-300 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-brand-500"
         />
 
-        <label className="block text-sm font-medium text-slate-700 mb-1">Password</label>
+        {/* Password */}
+        <label className="block text-sm font-medium text-slate-700 mb-1">
+          Password
+        </label>
         <input
-          className="w-full border border-slate-300 rounded-lg px-3 py-2 mb-6 focus:outline-none focus:ring-2 focus:ring-brand-500"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
           type="password"
           required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full border border-slate-300 rounded-lg px-3 py-2 mb-6 focus:outline-none focus:ring-2 focus:ring-brand-500"
         />
 
+        {/* Sign In Button */}
         <button
+          type="submit"
           disabled={loading}
-          className="w-full bg-brand-500 hover:bg-brand-600 text-white font-medium py-2 rounded-lg transition disabled:opacity-50"
+          className="w-full bg-brand-500 hover:bg-brand-600 text-white font-medium py-2.5 rounded-lg transition duration-200 disabled:opacity-50"
         >
-          {loading ? "Signing in..." : "Sign in"}
+          {loading ? "Signing in..." : "Sign In"}
         </button>
 
-        <div className="mt-5 text-xs text-slate-500 bg-slate-50 p-3 rounded-lg leading-relaxed">
-          <strong>Seeded demo accounts</strong> (password: password123)
-          <br />
-          Admin: admin@college.edu
-          <br />
-          Teacher: kumar@college.edu
-          <br />
-          Student: student@college.edu
+        {/* Demo Accounts */}
+        <div className="mt-6 text-xs text-slate-500 bg-slate-50 p-4 rounded-lg leading-relaxed border border-slate-200">
+          <strong className="block mb-2">Demo Accounts</strong>
+
+          <div>
+            <strong>Password:</strong> password123
+          </div>
+
+          <div className="mt-2">
+            <strong>Admin:</strong> admin@college.edu
+          </div>
+
+          <div>
+            <strong>Teacher:</strong> kumar@college.edu
+          </div>
+
+          <div>
+            <strong>Student:</strong> student@college.edu
+          </div>
         </div>
       </form>
     </div>

@@ -220,3 +220,32 @@ npx prisma db push
 This adds any new tables/columns without touching your existing data. Then
 push your code changes to GitHub as usual — Render and Vercel redeploy
 automatically on the new commit.
+
+## 11. This update: labs with multiple teachers, last-period subjects, cleaner views
+
+**New capabilities:**
+- **Lab co-teachers** — on the Assignment page, any Lab subject now shows a
+  "+ Add co-teacher" option, so 2-3 teachers can be scheduled together for the
+  same lab session. All of them are checked for conflicts and marked busy
+  together whenever the generator places that session.
+- **"Always last period" subjects** — mark a subject (e.g. Library, Sports) on
+  the Subjects tab with the new checkbox, and the generator will only ever
+  place it in the single last teaching period of the day, never anywhere else.
+- **Labs never span lunch** — this was already guaranteed by how consecutive
+  periods are detected (a lunch period breaks the adjacency), confirmed and
+  hardened in this update.
+- **Student timetable** now shows only the subject name — no teacher shown.
+- **Teacher timetable** now clearly shows the class as "DEPT SECTION (Yr N)"
+  instead of just the section letter.
+
+**Database migration required** — this update added new columns
+(`Subject.alwaysLastPeriod`, `Assignment.coTeacherIds`,
+`TimetableEntry.coTeacherIds`). On your computer, with `.env` pointed at your
+live database:
+```bash
+cd backend
+npx prisma@5.18.0 db push
+```
+(use whichever exact Prisma version you've been using locally so it matches
+this project's schema format). Existing data is preserved; this only adds the
+new columns.
